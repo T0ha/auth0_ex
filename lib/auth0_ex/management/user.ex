@@ -116,6 +116,15 @@ defmodule Auth0Ex.Management.User do
     do_get("#{@path}/#{user_id}/roles", params)
   end
 
+  @doc """
+    List the permissions associated with a user. Scopes: read:users read:roles
+
+      iex > Auth0Ex.Management.User.permissions("auth0|23423")
+  """
+  def permissions(user_id, params \\ %{}) do
+    do_get("#{@path}/#{user_id}/permissions", params)
+  end
+
   @doc false
   defp default_params do
     case Application.get_env(:auth0_ex, :v2_search) do
