@@ -125,6 +125,25 @@ defmodule Auth0Ex.Management.User do
     do_get("#{@path}/#{user_id}/permissions", params)
   end
 
+
+  @doc """
+    Assign the permissions to a user. Scopes: read:users read:roles
+
+      iex > Auth0Ex.Management.User.assign_permissions("auth0|23423", %{"permissions" => [%{"permission_name" => _}]})
+  """
+  def assign_permissions(user_id, body \\ %{}) do
+    do_post("#{@path}/#{user_id}/permissions", body)
+  end
+
+  @doc """
+    Assign the roles to a user.
+
+      iex > Auth0Ex.Management.User.assign_roles("auth0|23423", %{"roles => [""]})
+  """
+  def assign_roles(user_id, body \\ %{}) do
+    do_post("#{@path}/#{user_id}/roles", body)
+  end
+
   @doc false
   defp default_params do
     case Application.get_env(:auth0_ex, :v2_search) do
